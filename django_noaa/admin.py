@@ -25,6 +25,8 @@ class StationAdmin(admin.ModelAdmin):
         'longitude',
         'network',
         'load_temperatures',
+        'load_temperatures_min_date_loaded',
+        'load_temperatures_max_date_loaded',
     )
     
     list_filter = (
@@ -81,7 +83,10 @@ class TemperatureAdmin(admin.ModelAdmin):
         'station',
         'obs_start_datetime',
         'obs_end_datetime',
+        
+        't_min',
         't_hr_avg',
+        't_max',
     )
     
     list_filter = (

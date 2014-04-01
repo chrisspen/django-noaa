@@ -160,12 +160,14 @@ class Station(models.Model):
         blank=True,
         null=True,
         editable=False,
+        verbose_name=_('min date loaded'),
         help_text=_('The earliest date of hourly temperature data loaded.'))
     
     load_temperatures_max_date_loaded = models.DateField(
         blank=True,
         null=True,
         editable=False,
+        verbose_name=_('max date loaded'),
         help_text=_('The latest date of hourly temperature data loaded.'))
     
     class Meta:
