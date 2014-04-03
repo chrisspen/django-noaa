@@ -25,13 +25,15 @@ setup(
     description = "Django app for downloading and storing historical weather data from NOAA.",
     license = "LGPL",
     url = "https://github.com/chrisspen/django-noaa",
+    #https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers = [
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: LGPL License',
+        'License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Framework :: Django',
+        'Development Status :: 4 - Beta',
     ],
     zip_safe = False,
     install_requires = [
