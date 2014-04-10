@@ -9,10 +9,14 @@ class Command(BaseCommand):
     args = ''
     option_list = BaseCommand.option_list + (
         make_option('--force', action='store_true', default=False),
+        make_option('--year', default=0),
     )
     
     def handle(self, **options):
         q = Station.objects.filter(load_temperatures=True).only('id')
         for station in q.iterator():
             print station
-            station.load_temperature_records(force=options['force'])
+            station.load_temperature_records(
+                force=options['force'],
+                year=int(options['year']),
+            )

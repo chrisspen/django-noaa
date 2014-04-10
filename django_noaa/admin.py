@@ -60,7 +60,8 @@ class StationAdmin(admin.ModelAdmin):
     
     def get_actions(self, request):
         actions = super(StationAdmin, self).get_actions(request)
-        del actions['delete_selected']
+        if 'delete_selected' in actions:
+            del actions['delete_selected']
         return actions
     
     def get_readonly_fields(self, request, obj=None):
@@ -91,6 +92,7 @@ class TemperatureAdmin(admin.ModelAdmin):
     
     list_filter = (
         'obs_start_datetime',
+        #'obs_start_datetime__year',
     )
     
     search_fields = (

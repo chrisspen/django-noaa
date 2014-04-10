@@ -35,6 +35,9 @@ STATIONS_V1_KEYS = set([
 
 REFERENCE_DIR = os.path.abspath(os.path.join(os.path.split(__file__)[0], 'reference'))
 
+def to_fahrenheit(deg):
+    return 9.0/5.0*(deg)+32.0
+
 class Station(models.Model):
     """
     Represents a NOAA weather station.
@@ -260,17 +263,20 @@ class Station(models.Model):
         print
         print 'Done.'
     
-    def load_temperature_records(self, force=False):
+    def load_temperature_records(self, force=False, year=0):
         """
         Loads temperature records for all years starting with the minimum year.
         """
-        year = self.load_temperatures_min_year or date.today().year
+        _year = year
+        year = year or self.load_temperatures_min_year or date.today().year
         if not force and self.load_temperatures_max_date_loaded:
-            year = max(year, self.load_temperatures_max_date_loaded)
+            year = max(year, self.load_temperatures_max_date_loaded.year)
         while year <= date.today().year:
             print 'year:',year
             self.load_temperature_records_for_year(year=year)
             year += 1
+            if _year:
+                break
         self.save()
         
     @commit_on_success
@@ -349,6 +355,9 @@ class Station(models.Model):
                 for k,v in sorted(line.iteritems(), key=lambda o:o[0]):
                     print>>sys.stderr, k,v
                 raise
+
+        print '\r%i of %i %.02f%%' % (total, total, 100),
+        sys.stdout.flush()
 
 class Temperature(models.Model):
     """
