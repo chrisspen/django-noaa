@@ -10,16 +10,12 @@ setup(
     name = 'django-noaa',
     version = django_noaa.__version__,
     packages = find_packages(),
-#    package_data = {
-#        'django_sec': [
-#            'templates/*.*',
-#            'templates/*/*.*',
-#            'templates/*/*/*.*',
-#            'static/*.*',
-#            'static/*/*.*',
-#            'static/*/*/*.*',
-#        ],
-#    },
+    package_data = {
+        'django_noaa': [
+            'reference/*.*',
+        ],
+    },
+    include_package_data=True,
     author = "Chris Spencer",
     author_email = "chrisspen@gmail.com",
     description = "Django app for downloading and storing historical weather data from NOAA.",
